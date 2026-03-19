@@ -1,0 +1,77 @@
+{
+  "entities": {
+    "Pokemon": {
+      "title": "Pokemon",
+      "description": "Master list of Pokemon",
+      "type": "object",
+      "properties": {
+        "id": { "type": "integer" },
+        "name": { "type": "string" },
+        "generation": { "type": "string" },
+        "sprite": { "type": "string" },
+        "addedAt": { "type": "object" },
+        "lastSyncedAt": { "type": "object" }
+      },
+      "required": ["id", "name", "generation", "sprite"]
+    },
+    "UserPokemonData": {
+      "title": "UserPokemonData",
+      "description": "User specific checklist data for a pokemon",
+      "type": "object",
+      "properties": {
+        "normal": { "type": "boolean" },
+        "shiny": { "type": "boolean" },
+        "suerte": { "type": "boolean" },
+        "perfect": { "type": "boolean" },
+        "luckyShiny": { "type": "boolean" },
+        "maxLevel": { "type": "boolean" },
+        "updatedAt": { "type": "object" }
+      }
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile and role",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "user"] },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" }
+      },
+      "required": ["uid", "role"]
+    },
+    "PokedexMeta": {
+      "title": "PokedexMeta",
+      "description": "Global metadata for the Pokedex",
+      "type": "object",
+      "properties": {
+        "totalCount": { "type": "integer" },
+        "lastUpdatedAt": { "type": "object" },
+        "lastUpdatedBy": { "type": "string" },
+        "newPokemonAdded": { "type": "integer" }
+      }
+    }
+  },
+  "firestore": {
+    "/pokemon/{pokemonId}": {
+      "schema": "Pokemon",
+      "description": "Master Pokemon list"
+    },
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profiles"
+    },
+    "/users/{userId}/pokemon/{pokemonId}": {
+      "schema": "UserPokemonData",
+      "description": "User checklist data"
+    },
+    "/meta/pokedex": {
+      "schema": "PokedexMeta",
+      "description": "Global metadata"
+    },
+    "/meta/pokedex/syncHistory/{historyId}": {
+      "schema": "object",
+      "description": "Sync history logs"
+    }
+  }
+}

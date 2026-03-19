@@ -1,0 +1,108 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: pokemon
+    // Document ID: pokemonId (string representing ID)
+    // Fields:
+    //   - id: number (required)
+    //   - name: string (required)
+    //   - generation: string (required)
+    //   - sprite: string (required)
+    //   - addedAt: timestamp
+    //   - lastSyncedAt: timestamp
+    //
+    // Collection: users
+    // Document ID: userId (string)
+    // Fields:
+    //   - uid: string (required)
+    //   - role: string (required, enum: ['admin', 'user'])
+    //   - displayName: string
+    //   - photoURL: string
+    //
+    // Collection: users/{userId}/pokemon
+    // Document ID: pokemonId (string)
+    // Fields:
+    //   - normal: bool
+    //   - shiny: bool
+    //   - suerte: bool
+    //   - perfect: bool
+    //   - luckyShiny: bool
+    //   - maxLevel: bool
+    //   - updatedAt: timestamp
+    //
+    // Collection: meta
+    // Document ID: pokedex
+    // Fields:
+    //   - totalCount: number
+    //   - lastUpdatedAt: timestamp
+    //   - lastUpdatedBy: string
+    //   - newPokemonAdded: number
+    //
+    // ===============================================================
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && 
+        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin' || 
+         (request.auth.token.email == "oriol.parcerisa@gmail.com" && request.auth.token.email_verified == true));
+    }
+
+    function hasOnlyAllowedFields(fields) {
+      return request.resource.data.keys().hasOnly(fields);
+    }
+
+    // ===============================================================
+    // Collection Rules
+    // ===============================================================
+
+    // Master Pokemon list
+    match /pokemon/{pokemonId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // User profiles
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow create: if isOwner(userId) && 
+                      hasOnlyAllowedFields(['uid', 'role', 'displayName', 'photoURL']) &&
+                      (request.resource.data.role == 'user' || isAdmin());
+      allow update: if isOwner(userId) && 
+                      hasOnlyAllowedFields(['uid', 'role', 'displayName', 'photoURL']) &&
+                      (request.resource.data.role == resource.data.role || isAdmin());
+    }
+
+    // User checklist data
+    match /users/{userId}/pokemon/{pokemonId} {
+      allow read: if isOwner(userId);
+      allow write: if isOwner(userId) && 
+                     hasOnlyAllowedFields(['normal', 'shiny', 'suerte', 'perfect', 'luckyShiny', 'maxLevel', 'updatedAt']);
+    }
+
+    // Metadata
+    match /meta/pokedex {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /meta/pokedex/syncHistory/{historyId} {
+      allow read: if isAdmin();
+      allow create: if isAdmin();
+    }
+  }
+}

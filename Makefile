@@ -1,3 +1,5 @@
+#bin/bash
+
 APP_NAME=pokemon_checklist
 DC_COMMAND=docker compose --file ./docker/docker-compose.yml
 

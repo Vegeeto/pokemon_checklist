@@ -44,10 +44,10 @@ export const PokemonCard: React.FC<PokemonCardProps> = ({
       title={label}
       aria-label={label}
       className={cn(
-        "flex items-center justify-center p-3 rounded-xl border transition-all active:scale-90 group",
-        checked 
-          ? `${activeColor} border-transparent shadow-lg` 
-          : darkMode 
+        "flex items-center justify-center p-3 rounded-xl border transition-all active:scale-90 group cursor-pointer",
+        checked
+          ? `${activeColor} border-transparent shadow-lg`
+          : darkMode
             ? "bg-slate-800/50 border-white/5 text-slate-500 hover:border-white/20 hover:bg-slate-800"
             : "bg-slate-100 border-slate-200 text-slate-400 hover:border-slate-300 hover:bg-slate-200"
       )}

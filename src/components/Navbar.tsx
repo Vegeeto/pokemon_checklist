@@ -47,7 +47,7 @@ export function Navbar({
         <div className="flex items-center gap-1 sm:gap-2 pr-3 sm:pr-6 border-r border-white/10">
           <button
             onClick={() => setDarkMode(!darkMode)}
-            className={`p-2 rounded-full transition-all ${
+            className={`p-2 rounded-full transition-all cursor-pointer ${
               darkMode ? "text-slate-400 hover:text-white hover:bg-white/10" : "text-slate-500 hover:text-slate-900 hover:bg-slate-100"
             }`}
             title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
@@ -56,7 +56,7 @@ export function Navbar({
           </button>
           <button
             onClick={() => setShowImages(!showImages)}
-            className={`p-2 rounded-full transition-all ${
+            className={`p-2 rounded-full transition-all cursor-pointer ${
               darkMode ? "text-slate-400 hover:text-white hover:bg-white/10" : "text-slate-500 hover:text-slate-900 hover:bg-slate-100"
             }`}
             title={showImages ? "Hide Images" : "Show Images"}
@@ -68,7 +68,7 @@ export function Navbar({
         {userProfile?.role === 'admin' && (
           <button
             onClick={onOpenAdmin}
-            className="flex items-center gap-2 px-4 py-2 bg-emerald-600/20 text-emerald-400 border border-emerald-600/30 rounded-full hover:bg-emerald-600/30 transition-all text-sm font-bold"
+            className="flex items-center gap-2 px-4 py-2 bg-emerald-600/20 text-emerald-400 border border-emerald-600/30 rounded-full hover:bg-emerald-600/30 transition-all text-sm font-bold cursor-pointer"
           >
             <ShieldCheck className="w-4 h-4" />
             <span className="hidden sm:inline">Update Pokédex</span>
@@ -90,7 +90,7 @@ export function Navbar({
             />
             <button
               onClick={handleLogout}
-              className={`p-2 rounded-full transition-all ${
+              className={`p-2 rounded-full transition-all cursor-pointer ${
                 darkMode ? "text-slate-400 hover:text-white hover:bg-white/10" : "text-slate-500 hover:text-slate-900 hover:bg-slate-100"
               }`}
               title="Logout"

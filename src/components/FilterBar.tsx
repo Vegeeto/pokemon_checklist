@@ -72,9 +72,9 @@ export function FilterBar({
           
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className={`sm:hidden p-2.5 border rounded-2xl transition-all ${
-              darkMode 
-                ? "bg-slate-900/50 border-white/10 text-slate-400 hover:text-white" 
+            className={`sm:hidden p-2.5 border rounded-2xl transition-all cursor-pointer ${
+              darkMode
+                ? "bg-slate-900/50 border-white/10 text-slate-400 hover:text-white"
                 : "bg-slate-50 border-slate-200 text-slate-500 hover:text-slate-900"
             }`}
           >
@@ -83,9 +83,9 @@ export function FilterBar({
 
           <button
             onClick={onClear}
-            className={`hidden sm:block p-2.5 border rounded-2xl transition-all ${
-              darkMode 
-                ? "bg-slate-900/50 border-white/10 text-slate-400 hover:text-white" 
+            className={`hidden sm:block p-2.5 border rounded-2xl transition-all cursor-pointer ${
+              darkMode
+                ? "bg-slate-900/50 border-white/10 text-slate-400 hover:text-white"
                 : "bg-slate-50 border-slate-200 text-slate-500 hover:text-slate-900"
             }`}
             title="Clear Filters"
@@ -157,9 +157,9 @@ export function FilterBar({
 
           <button
             onClick={onClear}
-            className={`sm:hidden flex-1 py-2.5 border rounded-2xl text-sm font-bold transition-all ${
-              darkMode 
-                ? "bg-slate-900/50 border-white/10 text-slate-400 hover:text-white" 
+            className={`sm:hidden flex-1 py-2.5 border rounded-2xl text-sm font-bold transition-all cursor-pointer ${
+              darkMode
+                ? "bg-slate-900/50 border-white/10 text-slate-400 hover:text-white"
                 : "bg-slate-50 border-slate-200 text-slate-500 hover:text-slate-900"
             }`}
           >
@@ -179,10 +179,10 @@ export function FilterBar({
                 <button
                   key={field}
                   onClick={() => toggleVariantFilter(field as any)}
-                  className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all border ${
-                    state === 'all' 
-                      ? darkMode 
-                        ? 'bg-slate-900/30 border-white/5 text-slate-500 hover:border-white/20' 
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all border cursor-pointer ${
+                    state === 'all'
+                      ? darkMode
+                        ? 'bg-slate-900/30 border-white/5 text-slate-500 hover:border-white/20'
                         : 'bg-slate-100 border-slate-200 text-slate-400 hover:border-slate-300'
                       : state === 'owned'
                         ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-400'

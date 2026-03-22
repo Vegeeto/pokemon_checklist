@@ -12,7 +12,7 @@ export interface Pokemon {
 export interface UserPokemonData {
   normal: boolean;
   shiny: boolean;
-  suerte: boolean;
+  lucky: boolean;
   perfect: boolean;
   luckyShiny: boolean;
   maxLevel: boolean;

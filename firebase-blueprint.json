@@ -21,7 +21,7 @@
       "properties": {
         "normal": { "type": "boolean" },
         "shiny": { "type": "boolean" },
-        "suerte": { "type": "boolean" },
+        "lucky": { "type": "boolean" },
         "perfect": { "type": "boolean" },
         "luckyShiny": { "type": "boolean" },
         "maxLevel": { "type": "boolean" },

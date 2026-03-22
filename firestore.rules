@@ -28,7 +28,7 @@ service cloud.firestore {
     // Fields:
     //   - normal: bool
     //   - shiny: bool
-    //   - suerte: bool
+    //   - lucky: bool
     //   - perfect: bool
     //   - luckyShiny: bool
     //   - maxLevel: bool
@@ -90,8 +90,13 @@ service cloud.firestore {
     // User checklist data
     match /users/{userId}/pokemon/{pokemonId} {
       allow read: if isOwner(userId);
-      allow write: if isOwner(userId) && 
-                     hasOnlyAllowedFields(['normal', 'shiny', 'suerte', 'perfect', 'luckyShiny', 'maxLevel', 'updatedAt']);
+      allow write: if isOwner(userId) &&
+                     hasOnlyAllowedFields(['normal', 'shiny', 'lucky', 'perfect', 'luckyShiny', 'maxLevel', 'updatedAt']);
+    }
+
+    // Bulk operations
+    match /users/{userId}/pokemon/bulk {
+      allow write: if isOwner(userId);
     }
 
     // Metadata

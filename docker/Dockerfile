@@ -34,4 +34,7 @@ RUN npm ci
 
 COPY . .
 
+# Copy .env file for build-time environment variables
+COPY .env .
+
 RUN npm run build

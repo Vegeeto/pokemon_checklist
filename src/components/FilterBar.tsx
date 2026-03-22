@@ -40,7 +40,7 @@ export function FilterBar({
   const variantIcons = [
     { field: 'normal', icon: Trophy, label: 'Normal' },
     { field: 'shiny', icon: Star, label: 'Shiny' },
-    { field: 'suerte', icon: Clover, label: 'Lucky' },
+    { field: 'lucky', icon: Clover, label: 'Lucky' },
     { field: 'perfect', icon: Award, label: 'Perfect' },
     { field: 'luckyShiny', icon: Sparkles, label: 'L.Shiny' },
     { field: 'maxLevel', icon: Zap, label: 'Max Lvl' },
